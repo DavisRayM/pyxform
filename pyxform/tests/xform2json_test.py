@@ -32,6 +32,7 @@ class DumpAndLoadXForm2JsonTests(utils.XFormTestCase, PyxformTestCase):
             "yes_or_no_question.xls",
             "xlsform_spec_test.xlsx",
             "group.xls",
+            "choice_filter_test.xlsx",
         ]
         self.surveys = {}
         self.this_directory = os.path.dirname(__file__)
