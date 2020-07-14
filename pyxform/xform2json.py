@@ -267,7 +267,15 @@ class XFormToDictBuilder:
         obj = self.bindings[0]
         name = obj["nodeset"].split("/")[1]
         self.new_doc["name"] = name
-        self.new_doc["id_string"] = self.model["instance"][name]["id"]
+        # Check if the instance key contains a list
+        # If it contains a list pick the first object since the first instance
+        # will always be the primary instance
+        # https://getodk.github.io/xforms-spec/#instance
+        if isinstance(self.model["instance"], list):
+            primary_instance = self.model["instance"][0]
+            self.new_doc["id_string"] = primary_instance[name]["id"]
+        else:
+            self.new_doc["id_string"] = self.model["instance"][name]["id"]
 
     def _set_submission_info(self):
         if "submission" in self.model:
